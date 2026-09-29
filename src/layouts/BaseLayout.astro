@@ -3,36 +3,42 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = 'Green Page' } = Astro.props;
+const { 
+  title = 'Green Page', 
+  description = 'High-performance websites for modern businesses.' 
+} = Astro.props;
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title}</title>
 </head>
 
 <body>
-
-  <header class="header"> <!-- Header -->
-      <a href="/" class="heading">GreenPage</a>
-      <nav class="nav-links">
-        <a href="/">Home</a>
-      </nav>
+  <header class="header">
+    <a href="/" class="logo">GreenPage</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="main"> <!-- Main content area -->
+  <main class="main">
     <slot />
   </main>
 
-  <footer class="footer"> <!-- Footer -->
+  <footer class="footer">
     <p>&copy; {new Date().getFullYear()} Green Page. All rights reserved.</p>
   </footer>
-
 </body>
-
 </html>

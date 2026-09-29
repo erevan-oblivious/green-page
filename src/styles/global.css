@@ -1,21 +1,40 @@
 :root {
   /* Color Palette */
   --bg-main: #333f31; 
-  --bg-surface: #2b3529; /* Consolidated header, card, and footer background */
-  --border-subtle: rgba(255, 255, 255, 0.1); /* Subtle white border opacity */
+  --bg-surface: #2b3529; 
+  --border-subtle: rgba(255, 255, 255, 0.1); 
   
   --text-bright: #ffffff;
   --text-muted: #a3b8a3;
   --accent-light: #c0dbc0;
 
-  /* Typography */
+  /* Typography Scale */
   --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
+  --font-size-h1: clamp(1.75rem, 4vw, 2.5rem);
 
   /* Component Tokens */
   --radius-sm: 6px;
   --radius-md: 8px;
+}
+
+/* CSS Reset & Safeguards */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 body {
@@ -26,20 +45,30 @@ body {
   background-color: var(--bg-main);
   color: var(--text-bright);
   min-height: 100vh;
+  line-height: 1.6;
 }
 
 /* Header & Navigation */
 .header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 2.5rem;
+  padding: 1.25rem;
   background-color: var(--bg-surface);
+}
+
+.logo {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-bright);
+  text-decoration: none;
 }
 
 .nav-links {
   display: flex;
   gap: 1.25rem;
+  list-style: none;
 }
 
 .nav-links a {
@@ -48,115 +77,56 @@ body {
   transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a:focus-visible {
   color: var(--text-bright);
 }
 
-/* Layout Landmarks */
-.main {
-  flex-grow: 1;
-  max-width: 71.25rem; /* 1140px max width for desktop layout */
-  width: 100%;
-  margin-inline: auto;
-  padding: 2.5rem 2rem;
-  text-align: center;
-}
-
-.prose-container {
-  max-width: 65ch; /* ~65 characters per line for reading comfort */
-  margin-inline: auto;
-  padding-block: 1rem;
-}
-
-.heading {
-  font-size: var(--font-size-lg);
-  color: var(--text-bright);
-  margin: 0;
-  text-decoration: none;
-}
-
-/* Media Containers */
-.image-container {
-  width: 100%;
-  border-radius: var(--radius-sm);
-  margin-bottom: 1rem;
-}
-
-.video-container {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: 1.5rem 0;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.video-container iframe,
-.video-container video {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Cards Grid */
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.25rem;
-  margin-top: 1.875rem;
-}   
-
-.card {
-  flex: 1 1 250px;
-  background-color: var(--bg-surface);
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
-  text-align: left;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent-light);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.card h2 {
-  margin-top: 0;
-  color: var(--accent-light);
-} 
-
-.card p {
-  margin-bottom: 0;
-  font-size: var(--font-size-base);
-  line-height: 1.5;
-} 
-
-/* Footer */
-.footer {
-  background-color: var(--bg-surface);
-  text-align: center;
-  padding: 1.25rem 2rem;
-  font-size: var(--font-size-base);
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-subtle);
-}
-
-/* Mobile Layout */
 @media (max-width: 600px) {
   .header {
     flex-direction: column;
     gap: 1rem;
-    padding: 1.25rem;
   }
 
   .nav-links {
     flex-wrap: wrap;
     justify-content: center;
   }
+}
 
-  .card {
-    text-align: center;
-  }
+/* Layout Landmarks */
+.main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 71.25rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+.prose-container {
+  max-width: 65ch;
+  margin-inline: auto; /* Centers the text block inside .main */
+  text-align: center;
+}
+
+.prose-container > * + * {
+  margin-top: 1rem;
+}
+
+h1.heading {
+  font-size: var(--font-size-h1);
+  color: var(--text-bright);
+  line-height: 1.2;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--bg-surface);
+  width: 100%;
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
 }
