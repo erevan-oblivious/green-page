@@ -1,5 +1,3 @@
-@import "tailwindcss"; /* Import Tailwind CSS (includes modern preflight reset) */
-
 :root {
   /* Color Palette */
   --bg-main: #333f31; 
