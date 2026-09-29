@@ -70,7 +70,9 @@ body {
 
 .heading {
   font-size: var(--font-size-lg);
+  color: var(--text-bright);
   margin: 0;
+  text-decoration: none;
 }
 
 /* Media Containers */
